@@ -301,7 +301,7 @@ void set_remote_user(ngx_http_request_t *r)
         return;
     }
     ngx_snprintf(user_pass.data, user_pass.len, "%s:%s",
-        r->headers_in.user, basic_pass);
+        r->headers_in.user.data, basic_pass);
 
     base64_user_pass.len = ngx_base64_encoded_length(user_pass.len);
     base64_user_pass.data = ngx_pnalloc(r->pool, base64_user_pass.len);
