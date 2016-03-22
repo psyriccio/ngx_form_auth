@@ -293,15 +293,15 @@ void set_remote_user(ngx_http_request_t *r)
     const char *basic_pass = "ngx_form_auth_password";
     ngx_str_t user_pass, base64_user_pass, header;
 
-    user_pass.len = r->headers_in.user.len + ngx_strlen(basic_pass) + 1;
+    user_pass.len = r->headers_in.user.len + ngx_strlen(basic_pass) + 2;
     user_pass.data = ngx_pnalloc(r->pool, user_pass.len);
     if(user_pass.data == NULL) {
         ngx_log_error(NGX_LOG_ERR, r->connection->log, 0,
             "ngx_form_auth: Unable to set remote_user variable; not encoded.");
         return;
     }
-    ngx_snprintf(user_pass.data, user_pass.len, "%V:%s",
-        &r->headers_in.user, basic_pass);
+    ngx_snprintf(user_pass.data, user_pass.len, "%s:%s",
+        r->headers_in.user, basic_pass);
 
     base64_user_pass.len = ngx_base64_encoded_length(user_pass.len);
     base64_user_pass.data = ngx_pnalloc(r->pool, base64_user_pass.len);
