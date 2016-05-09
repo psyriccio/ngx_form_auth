@@ -233,7 +233,11 @@ static int pam_conversation(int num, const struct pam_message **message,
         tmp_response[i].resp = 0;
         tmp_response[i].resp_retcode = 0;
         if(message[i]->msg_style == PAM_PROMPT_ECHO_OFF) {
-            tmp_response[i].resp = strdup(data);
+            if(i == 0) {
+                tmp_response[i].resp = strdup(data);
+            } else {
+                tmp_response[i].resp = NULL;
+            }
         } else {
             free(tmp_response);
             return PAM_CONV_ERR;

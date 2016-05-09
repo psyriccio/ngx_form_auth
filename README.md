@@ -14,7 +14,7 @@ Installation
 1. Download [the nginx source](http://www.nginx.org/en/download.html) and extract it
 1. Clone this module repository into the directory
 1. Make sure you have installed development libraries for PAM (eg `pam-devel`)
-1. Follow the [nginx install documentation](http://nginx.org/en/docs/install.html) and add this module
+1. Follow the [nginx install documentation](http://nginx.org/en/docs/install.html) and add this module. If you have more modules for authentication, add this as the last one
 
     ./configure --add-module=ngx_form_auth
 
